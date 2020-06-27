@@ -1,13 +1,94 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: 'Roboto', sans-serif;
+  color:  rgb(15, 15, 15);
+}
+
+.container{
+  margin: 0 auto;
+  width: 1140px;
+}
+
+.section {
+  margin-top: 15px;
+}
+
+.header{
+  text-align: center;
+}
+
+.header__text{
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.main__card{
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 5px;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgba(9, 0, 51, 0.8);
+  box-shadow: 3px 3px 19px 0px rgba(0,0,0,0.75);
+}
+
+.card__content{
+  z-index: 10;
+  color: rgb(241, 241, 241);
+}
+.card__image{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: absolute;
+  bottom: -150px;
+  right: -120px;
+  z-index: -9;
+}
+
+.card__location{
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.card__main-text{
+  font-size: 1.2rem;
+}
+
+.card__total{
+  font-size: 1.2rem;
+}
+.card__stats{
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card__today{
+  padding-left: 4px;
+  font-weight: 300;
+  font-size: 0.75rem;
+}
+.card__today::before{
+  content: "+(";
+}
+.card__today::after{
+  content: ")";
+}
+
+.card__active{
+  margin-bottom: 7px;
+}
+
+.card__last__update{
+  font-size: 0.7rem;
 }
