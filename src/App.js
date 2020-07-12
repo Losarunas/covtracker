@@ -5,9 +5,9 @@ import Chart from './components/Chart';
 
 export default class App extends Component {
   state = {
-    country: null,
+    country: "World",
     data: null
-}
+  }
 
   componentDidMount = () => {
     this.fetchData();
@@ -15,20 +15,26 @@ export default class App extends Component {
 
   fetchData = async () => {
     const url = `https://api.covid19api.com/summary`;
-    // const url = `https://api.covid19api.com/country/lithuania`;
+    // const url = `https://api.covid19api.com/total/country/${this.state.country}`;
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ data });
   }
+
+  onSelectChange = (country) => {
+    this.setState({ country });
+  }
+
   render() {
     return (
       <div>
         <Header />
-        <Main 
+        <Main
           data={this.state.data}
           country={this.state.country}
+          onSelectChange={(country) => this.onSelectChange(country)}
         />
-        <Chart 
+        <Chart
           data={this.state.data}
           country={this.state.country}
         />
@@ -36,7 +42,7 @@ export default class App extends Component {
           onClick={this.showState}>
           State
         </button>
-        
+
       </div>
     )
   }
