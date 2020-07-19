@@ -14,20 +14,22 @@ export default class App extends Component {
     this.fetchData();
   }
 
-  fetchData = async (country) => {
-    let url;
-    if (country) {
-      url = `https://api.covid19api.com/total/country/${country}`;
-    } else {
-      url = `https://api.covid19api.com/summary`;
-    }
+  fetchData = async () => {
+    const url = `https://api.covid19api.com/summary`;
     const response = await fetch(url);
     const data = await response.json();
     this.setState({ data });
   }
 
+  fetchCountryData = async (country) => {
+    const url = `https://api.covid19api.com/total/country/${country}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    this.setState({ countryData: data });
+  }
+
   onSelectChange = (country) => {
-    this.fetchData(country);
+    country !== "World" && this.fetchCountryData(country);
     this.setState({ country });
   }
 
@@ -38,11 +40,13 @@ export default class App extends Component {
         <Header />
         <Main
           data={this.state.data}
+          countryData={this.state.countryData}
           country={this.state.country}
           onSelectChange={(country) => this.onSelectChange(country)}
         />
         <Chart
           data={this.state.data}
+          countryData={this.state.countryData}
           country={this.state.country}
         />
       </div>

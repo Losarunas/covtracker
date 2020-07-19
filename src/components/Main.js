@@ -1,7 +1,8 @@
 import React from 'react';
+import CountUp from 'react-countup';
 import Covid19img from '../images/cov.png';
 
-const Main = ({ country, data, onSelectChange }) => {
+const Main = ({ country, data, countryData, onSelectChange }) => {
     const onChange = (e) => {
         onSelectChange(e);
     }
@@ -14,10 +15,20 @@ const Main = ({ country, data, onSelectChange }) => {
         </div>
                     <div className="card__stats">
                         <div className="card__total">
-                            {data.Global.TotalConfirmed.toLocaleString()}
+                            <CountUp
+                                start={data.Global.TotalConfirmed - 1000000}
+                                end={data.Global.TotalConfirmed}
+                                duration={0.8}
+                                separator=" "
+                            />
                         </div>
                         <div className="card__today">
-                            {data.Global.NewConfirmed.toLocaleString()}
+                            <CountUp
+                                start={0}
+                                end={data.Global.NewConfirmed}
+                                duration={0.8}
+                                separator=" "
+                            />
                         </div>
                     </div>
                 </div>
@@ -27,10 +38,20 @@ const Main = ({ country, data, onSelectChange }) => {
         </div>
                     <div className="card__stats">
                         <div className="card__total">
-                            {data.Global.TotalDeaths.toLocaleString()}
+                            <CountUp
+                                start={data.Global.TotalDeaths - 10000}
+                                end={data.Global.TotalDeaths}
+                                duration={1.1}
+                                separator=" "
+                            />
                         </div>
                         <div className="card__today">
-                            {data.Global.NewDeaths.toLocaleString()}
+                            <CountUp
+                                start={0}
+                                end={data.Global.NewDeaths}
+                                duration={1.2}
+                                separator=" "
+                            />
                         </div>
                     </div>
                 </div>
@@ -41,10 +62,22 @@ const Main = ({ country, data, onSelectChange }) => {
         </div>
                     <div className="card__stats">
                         <div className="card__total">
-                            {data.Global.TotalRecovered.toLocaleString()}
+                            <CountUp
+                                start={data.Global.TotalRecovered - 100000}
+                                end={data.Global.TotalRecovered}
+                                duration={1.6}
+                                separator=" "
+                            />
+
                         </div>
                         <div className="card__today">
-                            {data.Global.NewRecovered.toLocaleString()}
+                            <CountUp
+                                start={0}
+                                end={data.Global.NewRecovered}
+                                duration={1.7}
+                                separator=" "
+                            />
+
                         </div>
                     </div>
                 </div>
@@ -53,7 +86,12 @@ const Main = ({ country, data, onSelectChange }) => {
                         Active:
         </div>
                     <div className="card__total">
-                        {(data.Global.TotalConfirmed - data.Global.TotalRecovered - data.Global.TotalDeaths).toLocaleString()}
+                        <CountUp
+                            start={10000}
+                            end={(data.Global.TotalConfirmed - data.Global.TotalRecovered - data.Global.TotalDeaths)}
+                            duration={2.2}
+                            separator=" "
+                        />
                     </div>
                 </div>
                 <div className="card__last__update">
@@ -64,15 +102,77 @@ const Main = ({ country, data, onSelectChange }) => {
     );
 
     const countryInfo = (
-        country !== "World" && data ? (
+        country !== "World" && countryData ? (
             <div>
-                Country{console.log(data)}
+                <div className="card__block">
+                    <div className="card__name">
+                        Total infected:
+                    </div>
+                    <div className="card__stats">
+                        <div className="card__total">
+                            <CountUp
+                                start={0}
+                                end={countryData[countryData.length - 1].Confirmed}
+                                duration={0.3}
+                                separator=" "
+                            />
+
+                        </div>
+                    </div>
+                </div>
+                <div className="card__block">
+                    <div className="card__name">
+                        Total deaths:
+                    </div>
+                    <div className="card__stats">
+                        <div className="card__total">
+                            <CountUp
+                                start={0}
+                                end={countryData[countryData.length - 1].Deaths}
+                                duration={0.5}
+                                separator=" "
+                            />
+
+                        </div>
+                    </div>
+                </div>
+                <div className="card__block">
+                    <div className="card__name">
+                        Total recovered:
+                    </div>
+                    <div className="card__stats">
+                        <div className="card__total">
+                            <CountUp
+                                start={0}
+                                end={countryData[countryData.length - 1].Recovered}
+                                duration={0.7}
+                                separator=" "
+                            />
+
+                        </div>
+                    </div>
+                </div>
+                <div className="card__block">
+                    <div className="card__name">
+                        Active:
+                    </div>
+                    <div className="card__stats">
+                        <div className="card__total">
+                            <CountUp
+                                start={0}
+                                end={countryData[countryData.length - 1].Active}
+                                duration={1}
+                                separator=" "
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
         ) : null
     )
 
     return (
-        data ? (
+        data || countryData ? (
             <section className="main">
                 <div className="main__card">
                     <img src={Covid19img} alt="covid-19-1" className="card__image" />
