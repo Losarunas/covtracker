@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pie, Line } from 'react-chartjs-2';
+import { Pie, Bar } from 'react-chartjs-2';
 
 const Chart = ({ data, country, countryData }) => {
     const worldChart =
@@ -26,7 +26,7 @@ const Chart = ({ data, country, countryData }) => {
 
     const countryChart =
         (country !== "World" && countryData ? (
-            <Line
+            <Bar
                 data={{
                     labels: [countryData.map((i, num) => `Day ${num + 1}`)],
                     datasets: [
@@ -56,6 +56,7 @@ const Chart = ({ data, country, countryData }) => {
     return (
         <div>
             {country === "World" ? worldChart : countryChart}
+            {country !== "World" && countryData ? console.log(countryData.map((i) => i.Confirmed)) : console.log("nothing")}
         </div>
 
     )

@@ -6,6 +6,7 @@ import Chart from './components/Chart';
 export default class App extends Component {
   state = {
     country: "World",
+    countrySlug: null,
     data: null,
     countryData: null
   }
@@ -29,7 +30,8 @@ export default class App extends Component {
   }
 
   onSelectChange = (country) => {
-    country !== "World" && this.fetchCountryData(country);
+    // Fetch country data, remove parentheses
+    country !== "World" && this.fetchCountryData(country.replace(/[()]/g, ''));
     this.setState({ country });
   }
 
