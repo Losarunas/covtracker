@@ -1,6 +1,7 @@
 import React from 'react';
 import CountUp from 'react-countup';
 import Covid19img from '../images/cov.png';
+import Loader from './Loader';
 
 const Main = ({ country, data, countryData, onSelectChange }) => {
     const onChange = (e) => {
@@ -12,7 +13,7 @@ const Main = ({ country, data, countryData, onSelectChange }) => {
                 <div className="card__block">
                     <div className="card__name">
                         Total infected:
-        </div>
+                    </div>
                     <div className="card__stats">
                         <div className="card__total">
                             <CountUp
@@ -35,7 +36,7 @@ const Main = ({ country, data, countryData, onSelectChange }) => {
                 <div className="card__block">
                     <div className="card__name">
                         Total deaths:
-        </div>
+                    </div>
                     <div className="card__stats">
                         <div className="card__total">
                             <CountUp
@@ -59,7 +60,7 @@ const Main = ({ country, data, countryData, onSelectChange }) => {
                 <div className="card__block">
                     <div className="card__name">
                         Total recovered:
-        </div>
+                    </div>
                     <div className="card__stats">
                         <div className="card__total">
                             <CountUp
@@ -84,7 +85,7 @@ const Main = ({ country, data, countryData, onSelectChange }) => {
                 <div className="card__active">
                     <div className="card__name">
                         Active:
-        </div>
+                    </div>
                     <div className="card__total">
                         <CountUp
                             start={10000}
@@ -98,7 +99,7 @@ const Main = ({ country, data, countryData, onSelectChange }) => {
                     Updated: {data.Date.replace('Z', ' ').replace('T', ' ')}
                 </div>
             </div>
-        ) : null
+        ) : <Loader />
     );
 
     const countryInfo = (
@@ -168,7 +169,7 @@ const Main = ({ country, data, countryData, onSelectChange }) => {
                     </div>
                 </div>
             </div>
-        ) : null
+        ) : <Loader />
     )
 
     return (
@@ -186,6 +187,7 @@ const Main = ({ country, data, countryData, onSelectChange }) => {
                     </div>
                 </div>
 
+                Top countries:
                 <select onChange={(e) => onChange(e.target.value)}>
                     <option value="World">World</option>
                     {data.Countries.map(i => (<option key={i.Country} value={i.Country}>{i.Country}</option>))}

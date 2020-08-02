@@ -15,6 +15,13 @@ export default class App extends Component {
     this.fetchData();
   }
 
+  //  fdate = () => {
+  //     const url = `https://api.covid19api.com/summary`;
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+  //     return data
+  //  }
+
   fetchData = async () => {
     const url = `https://api.covid19api.com/summary`;
     const response = await fetch(url);
@@ -31,6 +38,7 @@ export default class App extends Component {
 
   onSelectChange = (country) => {
     // Fetch country data, remove parentheses
+    this.setState({ countryData: null });
     country !== "World" && this.fetchCountryData(country.replace(/[()]/g, ''));
     this.setState({ country });
   }
